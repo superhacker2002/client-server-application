@@ -10,5 +10,6 @@ enum handler_type {
 };
 
 class HandlerFactory {
+  public:
     std::unique_ptr<IHandler> getHandler(handler_type function);
 };

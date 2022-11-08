@@ -7,6 +7,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -D FUNCTION=duplications
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -14,7 +16,17 @@ TEMPLATE = app
 
 SOURCES += \
         main.cpp \
-        tcpserver.cpp
+        tcpserver.cpp \
+        ../handler_factory.cpp \
+        ../duplications_handler.cpp \
+        ../palindromes_handler.cpp
+
+HEADERS += \
+        tcpserver.h \
+        ../handler_factory.h \
+        ../handler_interface.h \
+        ../duplications_handler.h \
+        ../palindromes_handler.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

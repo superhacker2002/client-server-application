@@ -6,16 +6,20 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <memory>
+#include "../handler_interface.h"
+#include "../handler_factory.h"
+
 
 class TcpServer : public QObject
 {
     Q_OBJECT
  public:
     explicit TcpServer(QObject *parent = nullptr);
- signals:
 
  public slots:
     void newConnection();
+    void readyRead(QTcpSocket *socket);
+
  private:
     std::unique_ptr<QTcpServer> server;
 
