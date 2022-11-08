@@ -1,6 +1,6 @@
-#include "palindroms_handler.h"
+#include "palindromes_handler.h"
 
-std::string PalindromsHandler::handle(std::string message) {
+std::string PalindromesHandler::handle(std::string message) {
     size_t i = 0, palindromes_counter = 0, word_length = 0;
     while (1) {
         if (message[i] == ' ' || message[i] == '\0') {
@@ -20,7 +20,7 @@ std::string PalindromsHandler::handle(std::string message) {
     return std::to_string(palindromes_counter);
 }
 
-bool PalindromsHandler::isPalindrome(std::string word) {
+bool PalindromesHandler::isPalindrome(std::string word) {
     bool is_palindrome = false;
     std::string reversed_word = word;
     std::reverse(reversed_word.begin(), reversed_word.end());
