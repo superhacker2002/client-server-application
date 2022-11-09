@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QtNetwork/QUdpSocket>
 #include <memory>
-#include "../handlers/handler_interface.h"
+#include "../../handlers/handler_interface.h"
 
 class UdpServer : public QObject
 {
@@ -13,7 +13,6 @@ public:
 
 public slots:
     void readyRead();
-    void disconnected();
     void processMessage(QByteArray message);
 
 private:

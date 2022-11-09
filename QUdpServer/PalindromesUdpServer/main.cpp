@@ -1,11 +1,10 @@
 #include <QCoreApplication>
-#include "tcpserver.h"
+#include "udpserver.h"
 #include "../../handlers/handler_factory.h"
-
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindromes));
+    UdpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindromes));
     return a.exec();
 }
