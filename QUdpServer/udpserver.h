@@ -1,5 +1,4 @@
-#ifndef UDPSERVER_H
-#define UDPSERVER_H
+#pragma once
 
 #include <QObject>
 #include <QtNetwork/QUdpSocket>
@@ -15,11 +14,11 @@ public:
 
 public slots:
     void readyRead();
-    void processMessage(QByteArray message, QHostAddress sender, quint16 senderPort);
+    void processMessage(QByteArray message);
 private:
     std::unique_ptr<QUdpSocket> socket_;
     std::unique_ptr<IHandler> handler_;
+    QHostAddress sender_;
+    quint16 senderPort_;
 
 };
-
-#endif // UDPSERVER_H
