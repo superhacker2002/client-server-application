@@ -1,11 +1,10 @@
 QT -= gui
-QT += core
-QT += network
-
-TARGET = QUdpSocket
+QT += core network
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
+
+TARGET = QUdpSocket
 
 TEMPLATE = app
 
@@ -17,12 +16,22 @@ QMAKE_CXXFLAGS += -DOPTION=palindromes
 
 SOURCES += \
         main.cpp \
-        udpserver.cpp
+        udpserver.cpp \
+        ../handlers/handler_factory.cpp \
+        ../handlers/duplications_handler.cpp \
+        ../handlers/palindromes_handler.cpp
 
 HEADERS += \
-        udpserver.h
+        udpserver.h \
+        ../handlers/handler_factory.h \
+        ../handlers/handler_interface.h \
+        ../handlers/duplications_handler.h \
+        ../handlers/palindromes_handler.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    udpserver.h
