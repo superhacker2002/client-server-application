@@ -21,7 +21,6 @@ void TcpServer::newConnection() {
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     socket->write("Hello client.\nPlease enter the message that will be processed by server..\r\n");
     socket->flush();
-
     socket->waitForBytesWritten();
 //    socket->close();
 }
