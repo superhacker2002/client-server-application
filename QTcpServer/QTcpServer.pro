@@ -7,7 +7,7 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -DOPTION=palindromes
+QMAKE_CXXFLAGS += -DHANDLER_TYPE=palindromes
 
 
 # You can make your code fail to compile if it uses deprecated APIs.

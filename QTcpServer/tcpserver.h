@@ -1,5 +1,4 @@
-#ifndef TCPSERVER_H
-#define TCPSERVER_H
+#pragma once
 
 #include <QObject>
 #include <QTcpServer>
@@ -17,12 +16,10 @@ class TcpServer : public QObject
  public slots:
     void newConnection();
     void readyRead();
+    void disconnected();
 
  private:
     std::unique_ptr<IHandler> handler_;
     std::unique_ptr<QTcpServer> server_;
     void processMessage(QTcpSocket* socket, QByteArray message);
-
 };
-
-#endif // TCPSERVER_H

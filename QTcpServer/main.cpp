@@ -6,6 +6,6 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::OPTION));
+    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::HANDLER_TYPE));
     return a.exec();
 }
