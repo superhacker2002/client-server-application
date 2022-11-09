@@ -7,7 +7,7 @@ TcpServer::TcpServer(std::unique_ptr<IHandler> handler, QObject *parent)
 {
     server_ = std::make_unique<QTcpServer>(this);
     connect(server_.get(), SIGNAL(newConnection()), this, SLOT(newConnection()));
-    if (!server_->listen(QHostAddress::Any, 9999)) {
+    if (!server_->listen(QHostAddress::Any, 9999)) { // TODO
         qDebug() << "Server could not start";
     } else {
         qDebug() << "Server started";

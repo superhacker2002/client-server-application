@@ -11,14 +11,14 @@ class UdpServer : public QObject
 public:
     explicit UdpServer(std::unique_ptr<IHandler> handler, QObject *parent = nullptr);
 
-
 public slots:
     void readyRead();
+    void disconnected();
     void processMessage(QByteArray message);
+
 private:
     std::unique_ptr<QUdpSocket> socket_;
     std::unique_ptr<IHandler> handler_;
     QHostAddress sender_;
     quint16 senderPort_;
-
 };

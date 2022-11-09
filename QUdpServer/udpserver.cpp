@@ -12,7 +12,7 @@ UdpServer::UdpServer(std::unique_ptr<IHandler> handler, QObject *parent)
         qDebug() << "Server could not start";
     }
     connect(socket_.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
-
+    connect(socket_.get(), SIGNAL(disconnected()), this, SLOT(disconnected()));
 }
 
 void UdpServer::readyRead() {
@@ -24,9 +24,12 @@ void UdpServer::readyRead() {
     socket_->waitForBytesWritten();
 }
 
+void UdpServer::disconnected() {
+    qDebug() << "connection is closed";
+}
+
 void UdpServer::processMessage(QByteArray message) {
     auto result_message = handler_->handle(message.toStdString()) + "\r\n";
     socket_->writeDatagram(QByteArray(result_message.c_str()), sender_, senderPort_);
     socket_->flush();
 }
-

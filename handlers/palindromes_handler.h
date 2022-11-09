@@ -5,7 +5,7 @@ class PalindromesHandler : public IHandler {
  public:
   PalindromesHandler() = default;
   ~PalindromesHandler() = default;
-  std::string handle(std::string message) override;
+  std::string handle(const std::string& message) override;
  private:
-   bool isPalindrome(std::string word);
+   bool isPalindrome(std::string&& word);
 };
