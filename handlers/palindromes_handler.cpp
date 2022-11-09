@@ -29,4 +29,3 @@ bool PalindromesHandler::isPalindrome(std::string word) {
     }
     return is_palindrome;
 }
-

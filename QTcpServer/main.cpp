@@ -1,9 +1,11 @@
 #include <QCoreApplication>
 #include "tcpserver.h"
+#include "../handlers/handler_factory.h"
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    TcpServer server;
+    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::OPTION));
     return a.exec();
 }

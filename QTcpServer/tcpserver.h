@@ -4,24 +4,24 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
-#include <QDebug>
+#include "../handlers/handler_interface.h"
 #include <memory>
-#include "../handler_interface.h"
-#include "../handler_factory.h"
 
 
 class TcpServer : public QObject
 {
     Q_OBJECT
  public:
-    explicit TcpServer(QObject *parent = nullptr);
+    explicit TcpServer(std::unique_ptr<IHandler> handler, QObject *parent = nullptr);
 
  public slots:
     void newConnection();
-    void readyRead(QTcpSocket *socket);
+    void readyRead();
 
  private:
-    std::unique_ptr<QTcpServer> server;
+    std::unique_ptr<IHandler> handler_;
+    std::unique_ptr<QTcpServer> server_;
+    void processMessage(QTcpSocket* socket, QByteArray message);
 
 };
 
