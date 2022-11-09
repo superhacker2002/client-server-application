@@ -15,7 +15,7 @@ public:
 
 public slots:
     void readyRead();
-    void processMessage(QByteArray message, QHostAddress &sender, quint16 senderPort);
+    void processMessage(QByteArray message, QHostAddress sender, quint16 senderPort);
 private:
     std::unique_ptr<QUdpSocket> socket_;
     std::unique_ptr<IHandler> handler_;

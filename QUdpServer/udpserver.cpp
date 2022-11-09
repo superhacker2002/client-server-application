@@ -19,17 +19,18 @@ void UdpServer::readyRead() {
     QByteArray received_message;
     received_message.resize(socket_->pendingDatagramSize());
 
-    QHostAddress *sender;
-    quint16 *senderPort;
-    socket_->readDatagram(received_message.data(), received_message.size(), sender, senderPort);
-    processMessage(received_message.trimmed(), *sender, *senderPort);
+    QHostAddress sender;
+    quint16 senderPort;
+    QByteArray welcome_message("Hello client.\nPlease enter the message that will be processed by server..\r\n");
+    socket_->writeDatagram(welcome_message, sender, senderPort);
+    socket_->readDatagram(received_message.data(), received_message.size(), &sender, &senderPort);
+    processMessage(received_message.trimmed(), sender, senderPort);
     socket_->waitForBytesWritten();
 }
 
-void UdpServer::processMessage(QByteArray message, QHostAddress &sender, quint16 senderPort) {
-    qDebug() << "message received";
-    auto result_message = handler_->handle(message.toStdString());
-    socket_->writeDatagram((result_message + "\r\n").c_str(), sender, senderPort);
+void UdpServer::processMessage(QByteArray message, QHostAddress sender, quint16 senderPort) {
+    auto result_message = handler_->handle(message.toStdString()) + "\r\n";
+    socket_->writeDatagram(QByteArray(result_message.c_str()), sender, senderPort);
     socket_->flush();
 }
 
