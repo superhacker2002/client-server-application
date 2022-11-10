@@ -9,7 +9,7 @@ class UdpServer : public QObject
 {
     Q_OBJECT
 public:
-    explicit UdpServer(std::unique_ptr<IHandler> handler, QObject *parent = nullptr);
+    explicit UdpServer(std::unique_ptr<IHandler> handler, uint16_t port, QObject *parent = nullptr);
 
 public slots:
     void readyRead();

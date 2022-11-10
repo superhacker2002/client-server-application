@@ -1,12 +1,12 @@
 #include "udpserver.h"
 #include <QDebug>
 
-UdpServer::UdpServer(std::unique_ptr<IHandler> handler, QObject *parent)
+UdpServer::UdpServer(std::unique_ptr<IHandler> handler, uint16_t port, QObject *parent)
     : QObject{parent},
       socket_(std::make_unique<QUdpSocket>(this)),
       handler_(std::move(handler))
 {
-    if (socket_->bind(QHostAddress::Any, 9999)) {
+    if (socket_->bind(QHostAddress::Any, port)) {
         qDebug() << "Server started";
     } else {
         qDebug() << "Server could not start";
