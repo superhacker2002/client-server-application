@@ -13,13 +13,13 @@ TEMPLATE = app
 
 SOURCES += \
         main.cpp \
-        tcpserver.cpp \
+        ../tcpserver.cpp \
         ../../handlers/handler_factory.cpp \
         ../../handlers/duplications_handler.cpp \
         ../../handlers/palindromes_handler.cpp
 
 HEADERS += \
-        tcpserver.h \
+        ../tcpserver.h \
         ../../handlers/handler_factory.h \
         ../../handlers/handler_interface.h \
         ../../handlers/duplications_handler.h \
@@ -29,6 +29,3 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-HEADERS += \
-    tcpserver.h

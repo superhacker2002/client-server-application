@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
-#include "tcpserver.h"
+#include "../tcpserver.h"
 #include "../../handlers/handler_factory.h"
 
 int main(int argc, char *argv[])
