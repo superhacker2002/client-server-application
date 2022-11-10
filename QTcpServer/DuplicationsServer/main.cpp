@@ -2,7 +2,6 @@
 #include <QCommandLineParser>
 #include "tcpserver.h"
 #include "../../handlers/handler_factory.h"
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {

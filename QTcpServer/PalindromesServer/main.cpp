@@ -1,11 +1,19 @@
 #include <QCoreApplication>
+#include <QCommandLineParser>
 #include "tcpserver.h"
 #include "../../handlers/handler_factory.h"
-
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindromes));
+
+    QCommandLineParser parser;
+    QCommandLineOption portNumber(QStringList() << "p", QCoreApplication::translate("main", "Port number of the server"), "port");
+    portNumber.setDefaultValue("9999");
+    parser.addOption(portNumber);
+    parser.process(a);
+    uint16_t port = parser.value(portNumber).toUInt();
+
+    TcpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindromes), port);
     return a.exec();
 }
