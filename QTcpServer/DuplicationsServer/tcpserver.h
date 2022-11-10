@@ -11,7 +11,7 @@ class TcpServer : public QObject
 {
     Q_OBJECT
  public:
-    explicit TcpServer(std::unique_ptr<IHandler> handler, QObject *parent = nullptr);
+    explicit TcpServer(std::unique_ptr<IHandler> handler, uint16_t port, QObject *parent = nullptr);
 
  public slots:
     void newConnection();

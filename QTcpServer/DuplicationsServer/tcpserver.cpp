@@ -1,13 +1,13 @@
 #include "tcpserver.h"
 #include <QDebug>
 
-TcpServer::TcpServer(std::unique_ptr<IHandler> handler, QObject *parent)
+TcpServer::TcpServer(std::unique_ptr<IHandler> handler, uint16_t port, QObject *parent)
     : QObject{parent},
       handler_(std::move(handler))
 {
     server_ = std::make_unique<QTcpServer>(this);
     connect(server_.get(), SIGNAL(newConnection()), this, SLOT(newConnection()));
-    if (!server_->listen(QHostAddress::Any, 9999)) { // TODO
+    if (!server_->listen(QHostAddress::Any, port)) {
         qDebug() << "Server could not start";
     } else {
         qDebug() << "Server started";
