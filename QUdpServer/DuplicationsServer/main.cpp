@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
-#include "udpserver.h"
+#include "../udpserver.h"
 #include "../../handlers/handler_factory.h"
 
 int main(int argc, char *argv[]) {
@@ -13,6 +13,6 @@ int main(int argc, char *argv[]) {
     parser.process(a);
     uint16_t port = parser.value(portNumber).toUInt();
 
-    UdpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindrome), port);
+    UdpServer server(HandlerFactory::getHandler(HandlerFactory::handlerType::palindromes), port);
     return a.exec();
 }

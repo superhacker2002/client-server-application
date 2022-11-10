@@ -14,13 +14,13 @@ TEMPLATE = app
 
 SOURCES += \
         main.cpp \
-        udpserver.cpp \
+        ../udpserver.cpp \
         ../../handlers/handler_factory.cpp \
         ../../handlers/duplications_handler.cpp \
         ../../handlers/palindromes_handler.cpp
 
 HEADERS += \
-        udpserver.h \
+        ../udpserver.h \
         ../../handlers/handler_factory.h \
         ../../handlers/handler_interface.h \
         ../../handlers/duplications_handler.h \
@@ -30,6 +30,3 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-HEADERS += \
-    udpserver.h

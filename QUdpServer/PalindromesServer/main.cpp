@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
-#include "udpserver.h"
+#include "../udpserver.h"
 #include "../../handlers/handler_factory.h"
 
 int main(int argc, char *argv[]) {
