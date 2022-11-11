@@ -36,8 +36,8 @@ OBJECTS       = main.o \
 		duplications_handler.o \
 		palindromes_handler.o \
 		moc_tcpserver.o
-QMAKE_TARGET  = TcpServer
-TARGET        = TcpServer
+TARGET        = DuplicationsTcpServer
+TARGET_PATH   = ../../
 
 ####### Custom Variables
 EXPORT_QMAKE_MAC_SDK = macosx
@@ -53,10 +53,10 @@ include /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-TcpServer:  $(OBJECTS)  
-	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
+$(TARGET):  $(OBJECTS)  
+	$(LINK) $(LFLAGS) -o $(TARGET_PATH)$(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
-all: TcpServer install
+all: install clean
 
 clean: compiler_clean 
 	-$(DEL_FILE) $(OBJECTS)
@@ -65,24 +65,11 @@ clean: compiler_clean
 
 ####### Sub-libraries
 
-xcodeproj:
-	@$(QMAKE) -spec macx-xcode "$(EXPORT__PRO_FILE_)" -nodepend
-
-mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
-
-mocables: compiler_moc_header_make_all compiler_moc_objc_header_make_all compiler_moc_source_make_all
-
-check: first
-
-benchmark: first
-
-compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_tcpserver.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_tcpserver.cpp
 moc_tcpserver.cpp: ../tcpserver.h \
@@ -136,12 +123,12 @@ moc_tcpserver.o: moc_tcpserver.cpp
 
 ####### Install
 
-install:  FORCE clean
+install: $(TARGET)
 
-uninstall:  FORCE
+uninstall:
+	$(DEL_FILE) $(TARGET_PATH)$(TARGET)
 
-FORCE:
-	$(DEL_FILE) TcpServer
+	
 	
 	
 

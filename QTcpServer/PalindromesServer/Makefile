@@ -36,8 +36,8 @@ OBJECTS       = main.o \
 		duplications_handler.o \
 		palindromes_handler.o \
 		moc_tcpserver.o
-QMAKE_TARGET  = TcpServer
-TARGET        = TcpServer
+TARGET        = PalindromesTcpServer
+TARGET_PATH   = ../../
 
 ####### Custom Variables
 EXPORT_QMAKE_MAC_SDK = macosx
@@ -53,8 +53,8 @@ include /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-TcpServer:  $(OBJECTS)  
-	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
+$(TARGET):  $(OBJECTS)  
+	$(LINK) $(LFLAGS) -o $(TARGET_PATH)$(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS) 
 
 all: install clean
 
@@ -136,10 +136,10 @@ moc_tcpserver.o: moc_tcpserver.cpp
 
 ####### Install
 
-install: TcpServer
+install: $(TARGET)
 
 uninstall:
-	$(DEL_FILE) TcpServer
+	$(DEL_FILE) $(TARGET_PATH)$(TARGET)
 
 	
 	
