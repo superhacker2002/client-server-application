@@ -27,4 +27,5 @@ uninstall:
 	make -C QUdpServer/DuplicationsServer uninstall
 	make -C QUdpServer/PalindromesServer uninstall
 	make -C QTcpClient uninstall
+	make -C QUdpClient uninstall
 	
