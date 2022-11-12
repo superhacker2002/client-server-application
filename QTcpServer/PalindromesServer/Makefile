@@ -54,7 +54,7 @@ first: all
 ####### Build rules
 
 $(TARGET):  $(OBJECTS)  
-	$(LINK) $(LFLAGS) -o $(TARGET_PATH)$(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS) 
+	$(LINK) $(LFLAGS) -o $(TARGET_PATH)$(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 all: install clean
 
@@ -65,24 +65,11 @@ clean: compiler_clean
 
 ####### Sub-libraries
 
-xcodeproj:
-	@$(QMAKE) -spec macx-xcode "$(EXPORT__PRO_FILE_)" -nodepend
-
-mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
-
-mocables: compiler_moc_header_make_all compiler_moc_objc_header_make_all compiler_moc_source_make_all
-
-check: first
-
-benchmark: first
-
-compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Cellar/qt@5/5.15.6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_tcpserver.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_tcpserver.cpp
 moc_tcpserver.cpp: ../tcpserver.h \

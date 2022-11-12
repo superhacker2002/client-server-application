@@ -18,14 +18,14 @@ void TcpServer::newConnection() {
     QTcpSocket *socket = server_->nextPendingConnection();
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    socket->write("Hello client.\nPlease enter the message that will be processed by server..\r\n");
-    socket->flush();
     socket->waitForBytesWritten();
 }
 
 void TcpServer::readyRead() {
     auto socket = static_cast<QTcpSocket*>(sender());
     QByteArray message = socket->readAll().trimmed();
+    QTextStream outstream(stdout);
+    qDebug() << "Message is received: " << message;
     processMessage(socket, message);
 }
 
@@ -39,6 +39,11 @@ void TcpServer::disconnected() {
 
 void TcpServer::processMessage(QTcpSocket* socket, QByteArray message) {
     std::string result = handler_->handle(message.toStdString());
-    socket->write((result + "\r\n").c_str());
+    qint64 writtenBytes = socket->write((result).c_str());
+    if (writtenBytes && writtenBytes != -1) {
+        qDebug() << "message was sent";
+    } else {
+        qDebug() << "message was not sent";
+    }
     socket->flush();
 }

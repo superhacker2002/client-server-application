@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     QCommandLineParser parser;
+    parser.addHelpOption();
     QCommandLineOption portNumber(QStringList() << "p", QCoreApplication::translate("main", "Port number of the server"), "port");
     portNumber.setDefaultValue("9999");
     parser.addOption(portNumber);
