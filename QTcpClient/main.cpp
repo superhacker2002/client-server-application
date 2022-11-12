@@ -3,7 +3,7 @@
 #include "tcpclient.h"
 #include <iostream>
 
-bool commandLineParserSuccess( QString &IP, uint16_t &port) {
+bool commandLineParserSuccess(QString &IP, uint16_t &port) {
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addPositionalArgument("IP", "server address");
@@ -42,7 +42,6 @@ void startTcpClient(QString IP, uint16_t port) {
     } catch (...) {
         exit(1);
     }
-
 }
 
 int main(int argc, char *argv[])
@@ -52,6 +51,7 @@ int main(int argc, char *argv[])
     uint16_t port;
 
     if (!commandLineParserSuccess(IP, port)) {
+        qDebug() << "Missing IP or port of the server.";
         return 1;
     }
     startTcpClient(IP, port);
