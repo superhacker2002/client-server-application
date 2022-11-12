@@ -24,10 +24,8 @@ bool commandLineParserSuccess( QString &IP, uint16_t &port) {
 void getMessages(TcpClient &client) {
     QString message;
     QTextStream instream(stdin);
-    QTextStream outstream(stdout);
     while (true) {
         qDebug() << "Enter message that will be proccesd by the server.";
-//        outstream.flush();
         message = instream.readLine();
         if (message.isEmpty()) {
             qDebug() << "Message is empty.";

@@ -41,9 +41,9 @@ void TcpClient::bytesWritten(qint64 bytes) {
 }
 
 void TcpClient::readyRead() {
-    qDebug() << "Message from server is received:";
-    QByteArray message = socket_->readAll();
-    qDebug() << message;
+    QTextStream out(stdout);
+    QString message = socket_->readAll();
+    out << message << "\n";
 }
 
 void TcpClient::disconnected() {

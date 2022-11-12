@@ -41,7 +41,7 @@ void TcpServer::processMessage(QTcpSocket* socket, QByteArray message) {
     std::string result = handler_->handle(message.toStdString());
     qint64 writtenBytes = socket->write((result).c_str());
     if (writtenBytes && writtenBytes != -1) {
-        qDebug() << "Message was sent to the client.";
+        qDebug() << "Message was processed and sent to the client.";
     } else {
         qDebug() << "Message could not be sent.";
     }
