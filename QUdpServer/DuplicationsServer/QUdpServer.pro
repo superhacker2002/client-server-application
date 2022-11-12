@@ -4,7 +4,7 @@ QT += core network
 CONFIG += c++17 console
 CONFIG -= app_bundle
 
-TARGET = QUdpSocket
+TARGET = DuplicationsUdpServer
 
 TEMPLATE = app
 
