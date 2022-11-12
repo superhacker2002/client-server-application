@@ -13,5 +13,5 @@ std::string DuplicationsHandler::handle(const std::string& message) {
             }
         }
     }
-    return "Message without duplicate symbols: " + result;
+    return "Message without duplicative ssymbols: " + result;
 }
