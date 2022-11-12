@@ -18,6 +18,7 @@ private:
 public slots:
     void readyRead();
     void bytesWritten(qint64 bytes);
+    void disconnected();
 };
 
 #endif // TCPCLIENT_H

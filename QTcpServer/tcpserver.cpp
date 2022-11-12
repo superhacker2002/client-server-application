@@ -33,7 +33,7 @@ void TcpServer::disconnected() {
     auto socket = static_cast<QTcpSocket*>(sender());
     socket->close();
     if (!socket->isOpen()) {
-        qDebug() << "connection is closed";
+        qDebug() << "Connection is closed";
     }
 }
 
@@ -41,9 +41,9 @@ void TcpServer::processMessage(QTcpSocket* socket, QByteArray message) {
     std::string result = handler_->handle(message.toStdString());
     qint64 writtenBytes = socket->write((result).c_str());
     if (writtenBytes && writtenBytes != -1) {
-        qDebug() << "message was sent";
+        qDebug() << "Message was sent to the client.";
     } else {
-        qDebug() << "message was not sent";
+        qDebug() << "Message could not be sent.";
     }
     socket->flush();
 }
