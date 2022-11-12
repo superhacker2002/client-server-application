@@ -19,7 +19,7 @@ std::string PalindromesHandler::handle(const std::string& message) {
         }
         ++i;
     }
-    return std::to_string(palindromes_counter);
+    return "Number of palindromes in message: " + std::to_string(palindromes_counter);
 }
 
 bool PalindromesHandler::isPalindrome(std::string&& word) {
