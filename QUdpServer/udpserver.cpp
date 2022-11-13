@@ -25,7 +25,7 @@ void UdpServer::readyRead() {
 }
 
 void UdpServer::processMessage(QByteArray message) {
-    auto result_message = handler_->handle(message.toStdString()) + "\r\n";
+    auto result_message = handler_->handle(message.toStdString());
     quint64 writtenBytes = socket_->writeDatagram(QByteArray(result_message.c_str()), sender_, senderPort_);
     if (writtenBytes) {
         qDebug() << "Message was processed and sent to the client.";

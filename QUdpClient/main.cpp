@@ -24,7 +24,7 @@ void getMessages(UdpClient &client, QString IP, uint16_t port) {
     QString message;
     QTextStream instream(stdin);
     while (true) {
-        qDebug() << "Enter message that will be proccesd by the server.";
+        qDebug() << "Enter message that will be proccesed by the server.";
         message = instream.readLine();
         if (message.isEmpty()) {
             qDebug() << "Message is empty.";
@@ -34,9 +34,9 @@ void getMessages(UdpClient &client, QString IP, uint16_t port) {
     }
 }
 
-void startTcpClient(QString IP, uint16_t port) {
+void startUdpClient(QString IP, uint16_t port) {
     try {
-        UdpClient client(IP, port);
+        UdpClient client;
         getMessages(client, IP, port);
     } catch (...) {
         exit(1);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         qDebug() << "Missing IP or port of the server.";
         return 1;
     }
-    startTcpClient(IP, port);
+    startUdpClient(IP, port);
 
     return a.exec();
 }

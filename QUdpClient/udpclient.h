@@ -9,7 +9,7 @@ class UdpClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit UdpClient(QString IP, uint16_t port, QObject *parent = nullptr);
+    explicit UdpClient(QObject *parent = nullptr);
     void sendData(QByteArray message, QString IP, uint16_t port);
 
 public slots:
